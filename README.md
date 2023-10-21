@@ -1,4 +1,4 @@
-#### 1. Projektname: 
+#### 1. Projektname:
 
 #### KinderQuiz Lernspaß für Erstklässler  
 
