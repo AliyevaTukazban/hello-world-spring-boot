@@ -1,3 +1,5 @@
+[![CI](https://github.com/AliyevaTukazban/hello-world-spring-boot/actions/workflows/tests.yml/badge.svg)](https://github.com/AliyevaTukazban/hello-world-spring-boot/actions/workflows/tests.yml)
+
 #### 1. Projektname:
 
 #### KinderQuiz Lernspaß für Erstklässler  
