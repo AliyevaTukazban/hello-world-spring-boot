@@ -5,6 +5,11 @@ build/
 !**/src/main/**/build/
 !**/src/test/**/build/
 
+### H2 DB ###
+*.mv.db
+*.trace.db
+
+
 ### STS ###
 .apt_generated
 .classpath
