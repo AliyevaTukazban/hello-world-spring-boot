@@ -10,20 +10,19 @@ import jakarta.persistence.Id;
 public class Frage {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private int id;
     private String text;
 
-    public Frage() {}
-
-    public Frage(String text) {
+    public Frage(int id, String text) {
+        this.id = id;
         this.text = text;
     }
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
