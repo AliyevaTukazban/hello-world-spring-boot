@@ -6,23 +6,22 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 
-@Entity
+
 public class Frage {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+
+    private long id;
     private String text;
 
-    public Frage(int id, String text) {
+    public Frage(long id, String text) {
         this.id = id;
         this.text = text;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
