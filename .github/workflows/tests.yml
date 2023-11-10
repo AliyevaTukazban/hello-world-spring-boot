@@ -13,4 +13,4 @@ jobs:
           distribution: "adopt"
           java-version: 17
       - name: clean build
-        run: gradle test --info --stacktrace --offline
+        run: gradle test --info --stacktrace
