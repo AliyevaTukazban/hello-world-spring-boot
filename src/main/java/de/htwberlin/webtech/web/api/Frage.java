@@ -1,10 +1,5 @@
 package de.htwberlin.webtech.web.api;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-
 
 
 public class Frage {

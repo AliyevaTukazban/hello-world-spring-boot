@@ -8,6 +8,8 @@ import java.util.List;
 @Repository
 public interface FrageRepository extends JpaRepository<FrageEntity, Long> {
 
+
+
     List<FrageEntity> findAllByText(String text);
 
 }
