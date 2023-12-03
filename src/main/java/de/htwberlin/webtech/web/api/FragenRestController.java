@@ -2,6 +2,8 @@ package de.htwberlin.webtech.web.api;
 
 import de.htwberlin.webtech.service.FrageService;
 import de.htwberlin.webtech.web.FrageManipulationRequest;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -11,6 +13,7 @@ import java.util.List;
 
 @RestController
 public class FragenRestController {
+    private static final Logger logger = LoggerFactory.getLogger(FragenRestController.class);
 
     private List<Frage> frageList;
     private FrageService frageService;
@@ -18,8 +21,8 @@ public class FragenRestController {
     public FragenRestController(FrageService frageService) {
         this.frageService = frageService;
         this.frageList = new ArrayList<>();
-        this.frageList.add(new Frage(1, "1+1"));
-        this.frageList.add(new Frage(2, "1-1"));
+        this.frageList.add(new Frage(1L, "1+1"));
+        this.frageList.add(new Frage(2L, "1-1"));
     }
 
     private FrageManipulationRequest convertToFrageManipulationRequest(Frage frage) {
@@ -28,11 +31,12 @@ public class FragenRestController {
 
     @PostMapping(path = "/api/v1/frage")
     public ResponseEntity<String> createQuestion(@RequestBody Frage frage) {
+        logger.info("Anfrage zum Erstellen einer Frage empfangen: {}", frage);
         FrageManipulationRequest request = convertToFrageManipulationRequest(frage);
 
         // Hier rufst du die Methode im FrageService auf
         frageService.create(request);
-
+        logger.info("Frage erfolgreich erstellt");
         // Rückgabe einer Erfolgsmeldung
         return ResponseEntity.status(HttpStatus.CREATED).body("Frage wurde erfolgreich erstellt");
     }
