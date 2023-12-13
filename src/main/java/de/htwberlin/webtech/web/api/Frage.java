@@ -11,8 +11,8 @@ public class Frage {
     public Frage() {
         // Standardkonstruktor-Logik hier, falls benötigt
     }
-    @JsonCreator
-    public Frage(@JsonProperty("id") Long id, @JsonProperty("text") String text) {
+
+    public Frage( Long id, String text) {
         this.id = id;
         this.text = text;
     }

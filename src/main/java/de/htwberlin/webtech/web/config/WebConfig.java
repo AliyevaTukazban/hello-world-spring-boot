@@ -8,19 +8,17 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @Configuration
 @EnableWebMvc
 public class WebConfig implements WebMvcConfigurer {
+    public void addCorsMappings(CorsRegistry registry) {
+        registry.addMapping("/api/**")
+                .allowedMethods("*")
+                .allowedOrigins(
+                        "http://localhost:5173"
 
+                );
 
-
-        public void addCorsMappings(CorsRegistry registry) {
-            registry.addMapping("/api/**")
-                    .allowedMethods("GET", "POST", "PUT", "DELETE")
-                    .allowedOrigins(
-                            "http://localhost:5173/",
-                            "https://github.com/AliyevaTukazban/HelloWorld-Frontend"
-                    );
-
-
-        }
 
 
     }
+
+
+}
