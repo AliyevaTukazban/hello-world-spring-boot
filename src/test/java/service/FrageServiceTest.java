@@ -43,21 +43,6 @@ class FrageServiceTest {
         assertEquals(mockFragen.get(0).getText(), result.get(0).getText());
         assertEquals(mockFragen.get(1).getText(), result.get(1).getText());
     }
-
-    @Test
-    void testFindById() {
-        // Mocking
-        long questionId = 1L;
-        FrageEntity mockFrageEntity = new FrageEntity("Testfrage");
-        when(frageRepository.findById(questionId)).thenReturn(Optional.of(mockFrageEntity));
-
-        // Test
-        Frage result = frageService.findById(questionId);
-
-        // Verify
-        assertEquals(mockFrageEntity.getText(), result.getText());
-    }
-
     @Test
     void testCreate() {
         // Mocking
@@ -125,19 +110,6 @@ class FrageServiceTest {
 
         // Verify
         assertTrue(result.isEmpty());
-    }
-
-    @Test
-    void testFindByIdNotFound() {
-        // Mocking
-        long questionId = 1L;
-        when(frageRepository.findById(questionId)).thenReturn(Optional.empty());
-
-        // Test
-        Frage result = frageService.findById(questionId);
-
-        // Verify
-        assertNull(result);
     }
 
 

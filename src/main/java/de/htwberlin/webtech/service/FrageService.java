@@ -7,6 +7,7 @@ import de.htwberlin.webtech.web.api.Frage;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -18,6 +19,10 @@ public class FrageService {
         this.frageRepository = frageRepository;
     }
 
+    public Optional<FrageEntity> findById(Long id) {
+        return frageRepository.findById(id);
+    }
+
     public List<Frage> findAll() {
         List<FrageEntity> fragen = frageRepository.findAll();
         return fragen.stream()
@@ -25,16 +30,12 @@ public class FrageService {
                 .collect(Collectors.toList());
     }
 
-    public Frage findById(Long id) {
-        var frageEntity = frageRepository.findById(id);
-        return frageEntity.map(this::transformEntity).orElse(null);
-    }
-
     public Frage create(FrageManipulationRequest request) {
         var frageEntity = new FrageEntity(request.getText());
         frageEntity = frageRepository.save(frageEntity);
         return transformEntity(frageEntity);
     }
+
     public Frage update(Long id, FrageManipulationRequest request) {
         var frageEntityOptional = frageRepository.findById(id);
         if (frageEntityOptional.isEmpty()) {
@@ -64,4 +65,22 @@ public class FrageService {
         );
     }
 
+    public Frage rateFrage(Long id, String type) {
+        var frageEntityOptional = frageRepository.findById(id);
+        if (frageEntityOptional.isEmpty()) {
+            return null;
+        }
+
+        var frageEntity = frageEntityOptional.get();
+
+        if ("up".equals(type)) {
+            frageEntity.setUpvotes(frageEntity.getUpvotes() + 1);
+        } else if ("down".equals(type)) {
+            frageEntity.setDownvotes(frageEntity.getDownvotes() + 1);
+        }
+
+        frageEntity = frageRepository.save(frageEntity);
+
+        return transformEntity(frageEntity);
+    }
 }
