@@ -13,16 +13,8 @@ public class FrageEntity {
     @Column(name = "text", nullable = false)
     private String text;
 
-    @Column(nullable = false)
-    private int upvotes;
-
-    @Column(nullable = false)
-    private int downvotes;
-
     public FrageEntity(String text) {
         this.text = text;
-        this.upvotes = 0;
-        this.downvotes = 0;
     }
 
     protected FrageEntity() {
@@ -32,6 +24,9 @@ public class FrageEntity {
         return id;
     }
 
+    public void setId(long id) {
+        this.id = id;
+    }
 
     public String getText() {
         return text;
@@ -39,20 +34,5 @@ public class FrageEntity {
 
     public void setText(String text) {
         this.text = text;
-    }
-    public int getUpvotes() {
-        return upvotes;
-    }
-
-    public void setUpvotes(int upvotes) {
-        this.upvotes = upvotes;
-    }
-
-    public int getDownvotes() {
-        return downvotes;
-    }
-
-    public void setDownvotes(int downvotes) {
-        this.downvotes = downvotes;
     }
 }

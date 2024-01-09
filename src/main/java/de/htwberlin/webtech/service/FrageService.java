@@ -4,6 +4,7 @@ import de.htwberlin.webtech.persistence.FrageEntity;
 import de.htwberlin.webtech.persistence.FrageRepository;
 import de.htwberlin.webtech.web.FrageManipulationRequest;
 import de.htwberlin.webtech.web.api.Frage;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -63,24 +64,5 @@ public class FrageService {
                 frageEntity.getId(),
                 frageEntity.getText()
         );
-    }
-
-    public Frage rateFrage(Long id, String type) {
-        var frageEntityOptional = frageRepository.findById(id);
-        if (frageEntityOptional.isEmpty()) {
-            return null;
-        }
-
-        var frageEntity = frageEntityOptional.get();
-
-        if ("up".equals(type)) {
-            frageEntity.setUpvotes(frageEntity.getUpvotes() + 1);
-        } else if ("down".equals(type)) {
-            frageEntity.setDownvotes(frageEntity.getDownvotes() + 1);
-        }
-
-        frageEntity = frageRepository.save(frageEntity);
-
-        return transformEntity(frageEntity);
     }
 }

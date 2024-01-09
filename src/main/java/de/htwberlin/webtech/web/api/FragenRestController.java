@@ -50,35 +50,6 @@ public class FragenRestController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Frage mit der angegebenen ID wurde nicht gefunden");
         }
     }
-
-    @PostMapping(path = "/api/v1/frage/{id}/upvote")
-    public ResponseEntity<String> upvoteQuestion(@PathVariable Long id) {
-        // Überprüfen, ob die Frage mit der angegebenen ID existiert
-        Optional<FrageEntity> optionalFrageEntity = frageService.findById(id);
-        if (optionalFrageEntity.isPresent()) {
-            // Upvoten der Frage
-            frageService.rateFrage(id, "up");
-            return ResponseEntity.ok("Frage wurde erfolgreich upgevotet");
-        } else {
-            // Falls die Frage nicht gefunden wurde, Rückgabe einer Fehlermeldung
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Frage mit der angegebenen ID wurde nicht gefunden");
-        }
-    }
-
-    @PostMapping(path = "/api/v1/frage/{id}/downvote")
-    public ResponseEntity<String> downvoteQuestion(@PathVariable Long id) {
-        // Überprüfen, ob die Frage mit der angegebenen ID existiert
-        Optional<FrageEntity> optionalFrageEntity = frageService.findById(id);
-        if (optionalFrageEntity.isPresent()) {
-            // Downvoten der Frage
-            frageService.rateFrage(id, "down");
-            return ResponseEntity.ok("Frage wurde erfolgreich downgevotet");
-        } else {
-            // Falls die Frage nicht gefunden wurde, Rückgabe einer Fehlermeldung
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Frage mit der angegebenen ID wurde nicht gefunden");
-        }
-    }
-
     @DeleteMapping(path = "/api/v1/frage/{id}")
     public ResponseEntity<String> deleteQuestion(@PathVariable Long id) {
         // Überprüfen, ob die Frage mit der angegebenen ID existiert
@@ -92,5 +63,6 @@ public class FragenRestController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Frage mit der angegebenen ID wurde nicht gefunden");
         }
     }
+
 }
 

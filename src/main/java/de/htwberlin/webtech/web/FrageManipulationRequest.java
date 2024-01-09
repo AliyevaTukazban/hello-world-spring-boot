@@ -16,7 +16,4 @@ public class FrageManipulationRequest {
     public void setText(String text) {
         this.text = text;
     }
-
-
-
 }
