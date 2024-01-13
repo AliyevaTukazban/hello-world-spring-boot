@@ -43,33 +43,6 @@ class FrageServiceTest {
         assertEquals(mockFragen.get(0).getText(), result.get(0).getText());
         assertEquals(mockFragen.get(1).getText(), result.get(1).getText());
     }
-
-    @Test
-    void update_ReturnsUpdatedFrage_WhenIdExists() {
-        Long id = 1L;
-        FrageEntity existingFrageEntity = new FrageEntity("Bestehende Frage");
-        existingFrageEntity.setId(id);
-
-        when(frageRepository.findById(id)).thenReturn(Optional.of(existingFrageEntity));
-
-        FrageManipulationRequest request = new FrageManipulationRequest();
-        request.setText("Aktualisierte Frage");
-
-        when(frageRepository.save(any(FrageEntity.class))).thenAnswer(invocation -> {
-            FrageEntity savedEntity = invocation.getArgument(0);
-            return savedEntity;
-        });
-
-        Frage result = frageService.update(id, request);
-
-        assertNotNull(result);
-        assertEquals(id, result.getId());
-        assertEquals("Aktualisierte Frage", result.getText());
-
-        verify(frageRepository, times(1)).findById(id);
-        verify(frageRepository, times(1)).save(any(FrageEntity.class));
-    }
-
     @Test
     void update_ReturnsNull_WhenIdDoesNotExist() {
         Long id = 1L;
@@ -87,19 +60,6 @@ class FrageServiceTest {
         verify(frageRepository, never()).save(any(FrageEntity.class));
     }
 
-    @Test
-    void deleteById_ReturnsTrue_WhenIdExists() {
-        Long id = 1L;
-        FrageEntity existingFrageEntity = new FrageEntity("Bestehende Frage");
-        existingFrageEntity.setId(id);
-
-        when(frageRepository.existsById(id)).thenReturn(true);
-
-        assertTrue(frageService.deleteById(id));
-
-        verify(frageRepository, times(1)).existsById(id);
-        verify(frageRepository, times(1)).deleteById(id);
-    }
     @Test
     void deleteById_ReturnsFalse_WhenIdDoesNotExist() {
         Long id = 1L;

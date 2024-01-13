@@ -1,16 +1,26 @@
-name: CI
+name: Java CI with Gradle
 
-on: [ push ]
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
 
 jobs:
-  test:
+  build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout code
+        uses: actions/checkout@v2
+
       - name: Set up JDK 17
         uses: actions/setup-java@v2
         with:
-          distribution: "adopt"
           java-version: 17
-      - name: clean build
-        run: gradle test --info --stacktrace
+          distribution: "temurin"
+
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
+
+      - name: Run Backend Tests
+        run: ./gradlew test
