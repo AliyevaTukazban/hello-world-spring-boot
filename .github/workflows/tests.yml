@@ -1,16 +1,16 @@
 name: CI
 
-on: [ push ]
+on: [push]
 
 jobs:
   test:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Set up JDK 19
+      - name: Set up JDK 19 and Gradle
         uses: actions/setup-java@v2
         with:
           distribution: "adopt"
           java-version: 19
       - name: clean build
-        run: gradlew clean test --info --stacktrace
+        run: gradle test --info --stacktrace
