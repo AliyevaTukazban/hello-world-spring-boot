@@ -9,7 +9,6 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -26,12 +25,11 @@ jobs:
       - name: Run Backend Tests
         run: ./gradlew test
 
-      - - name: Upload Test Artifacts
-          uses: actions/upload-artifact@v2
-          with:
-            name: test-results
-            path: src/test/java/service/FrageServiceTest.java
-
+      - name: Upload Test Artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: test-results
+          path: build/reports/tests/test
 
       - name: Upgrade Gradle Wrapper
         run: ./gradlew wrapper --gradle-version=8.3
